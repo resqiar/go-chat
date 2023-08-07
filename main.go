@@ -9,6 +9,12 @@ import (
 func main() {
 	http.Handle("/", &handlers.TemplateHandler{File: "chat.html"})
 
+	// public room
+	publicRoom := NewRoom()
+	// execute the room as a goroutine
+	go publicRoom.Run()
+	http.Handle("/ws/public", publicRoom)
+
 	if err := http.ListenAndServe(":5000", nil); err != nil {
 		log.Fatal(err)
 	}
