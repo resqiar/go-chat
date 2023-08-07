@@ -1,18 +1,15 @@
 package main
 
 import (
+	"go-chat/handlers"
 	"log"
 	"net/http"
 )
 
 func main() {
-	http.HandleFunc("/", helloWorld)
+	http.Handle("/", &handlers.TemplateHandler{File: "chat.html"})
 
 	if err := http.ListenAndServe(":5000", nil); err != nil {
 		log.Fatal(err)
 	}
-}
-
-func helloWorld(w http.ResponseWriter, r *http.Request) {
-	w.Write([]byte("Hello World!"))
 }
