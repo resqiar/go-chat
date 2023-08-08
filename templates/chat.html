@@ -5,9 +5,22 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <script src="https://unpkg.com/htmx.org@1.9.4" integrity="sha384-zUfuhFKKZCbHTY6aRR46gxiqszMk5tcHjsVFxnUo8VMus4kHGVdIYVbOYYNlKmHV" crossorigin="anonymous"></script>
+        <script src="https://unpkg.com/htmx.org/dist/ext/ws.js"></script>
+        <script src="https://cdn.tailwindcss.com"></script>
     </head>
-    <body >
-        <h1>Hello from chat.html</h1>
+    <body>
+        <header class="w-full flex items-center flex-col justify-center py-2">
+            <h1 class="font-bold text-lg">Public Room</h1>
+            <p class="text-sm">Chat with everyone with no limit, no rule, nothing. Never share sensitive information or you'll regret for the rest of your lifetime</p>
+        </header>
+
+        <div class="px-8" hx-ext="ws" ws-connect="/ws/public">
+            <div id="chat_room" class="w-full bg-base-200 min-h-[500px] max-h-[500px] overflow-y-auto"></div>
+
+            <form id="form" ws-send class="mt-4">
+                <input class="w-full p-4 rounded-lg border-orange-500 border-solid border-2" name="chat_message">
+            </form>
+        </div>
     </body>
 </html>
 

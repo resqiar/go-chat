@@ -1,6 +1,7 @@
 package main
 
 import (
+	"go-chat/chat"
 	"go-chat/handlers"
 	"log"
 	"net/http"
@@ -10,7 +11,7 @@ func main() {
 	http.Handle("/", &handlers.TemplateHandler{File: "chat.html"})
 
 	// public room
-	publicRoom := NewRoom()
+	publicRoom := chat.NewRoom()
 	// execute the room as a goroutine
 	go publicRoom.Run()
 	http.Handle("/ws/public", publicRoom)
